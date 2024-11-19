@@ -113,3 +113,125 @@ ng in a new thread...
 2024-11-19 09:03:47,277 - INFO - Validating final document...
 2024-11-19 09:03:48,202 - citation_tool - INFO - Document processing completed successfully.
 2024-11-19 09:03:48,202 - INFO - Document processing completed successfully.
+2024-11-19 09:20:06,344 - INFO - Use pytorch device_name: cpu
+2024-11-19 09:20:06,345 - INFO - Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2024-11-19 09:25:34,383 - citation_tool - INFO - TeX file selected: C:/Users/cgatt/OneDrive/Desktop/Reference Tooling/Latex Files/demo.tex
+2024-11-19 09:25:36,538 - citation_tool - INFO - BibTeX file selected: C:/Users/cgatt/OneDrive/Desktop/Reference Tooling/Latex Files/demo.bib
+2024-11-19 09:25:39,709 - citation_tool - INFO - Starting document processing...
+2024-11-19 09:25:39,709 - citation_tool - INFO - Started processing in a new thread.
+2024-11-19 09:25:39,709 - citation_tool - INFO - Parsing TeX document: C:/Users/cgatt/OneDrive/Desktop/Reference Tooling/Latex Files/demo.tex
+2024-11-19 09:25:39,709 - citation_tool - INFO - Extracted citations: set()
+2024-11-19 09:25:39,709 - citation_tool - INFO - Parsing BibTeX file: C:/Users/cgatt/OneDrive/Desktop/Reference Tooling/Latex Files/demo.bib
+2024-11-19 09:25:59,379 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-1-84882-710-3_14
+2024-11-19 09:25:59,601 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-1-84882-710-3_14: 0.19
+2024-11-19 09:26:00,045 - citation_tool - WARNING - PDF not available for DOI 10.4018/978-1-5225-0571-6.ch064
+2024-11-19 09:26:00,109 - citation_tool - INFO - Similarity Score for DOI 10.4018/978-1-5225-0571-6.ch064: 0.27
+2024-11-19 09:26:00,494 - citation_tool - WARNING - PDF not available for DOI 10.4018/978-1-5225-0571-6.ch003
+2024-11-19 09:26:00,560 - citation_tool - INFO - Similarity Score for DOI 10.4018/978-1-5225-0571-6.ch003: 0.33
+2024-11-19 09:26:02,327 - citation_tool - WARNING - PDF not available for DOI 10.2174/1573405618666220331111237
+2024-11-19 09:26:02,391 - citation_tool - INFO - Similarity Score for DOI 10.2174/1573405618666220331111237: 0.18
+2024-11-19 09:26:03,822 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-94-009-3537-2_33
+2024-11-19 09:26:03,889 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-94-009-3537-2_33: 0.33
+2024-11-19 09:26:05,336 - citation_tool - WARNING - PDF not available for DOI 10.2174/157340560903131120162258
+2024-11-19 09:26:05,405 - citation_tool - INFO - Similarity Score for DOI 10.2174/157340560903131120162258: 0.24
+2024-11-19 09:26:08,054 - citation_tool - WARNING - PDF not available for DOI 10.1017/cbo9780511760976.004
+2024-11-19 09:26:08,120 - citation_tool - INFO - Similarity Score for DOI 10.1017/cbo9780511760976.004: 0.18
+2024-11-19 09:26:08,345 - citation_tool - WARNING - PDF not available for DOI 10.4018/978-1-5225-0571-6.ch002
+2024-11-19 09:26:08,394 - citation_tool - INFO - Similarity Score for DOI 10.4018/978-1-5225-0571-6.ch002: 0.30
+2024-11-19 09:26:09,616 - citation_tool - WARNING - PDF not available for DOI 10.1016/j.jmir.2023.06.131
+2024-11-19 09:26:09,661 - citation_tool - INFO - Similarity Score for DOI 10.1016/j.jmir.2023.06.131: 0.18
+2024-11-19 09:26:11,632 - citation_tool - WARNING - PDF not available for DOI 10.1201/9781315368214-11
+2024-11-19 09:26:11,678 - citation_tool - INFO - Similarity Score for DOI 10.1201/9781315368214-11: 0.28
+2024-11-19 09:26:13,161 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-031-46266-5_9
+2024-11-19 09:26:13,205 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-031-46266-5_9: 0.32
+2024-11-19 09:26:14,070 - citation_tool - WARNING - PDF not available for DOI 10.1016/s0895-6111(96)00037-7
+2024-11-19 09:26:14,113 - citation_tool - INFO - Similarity Score for DOI 10.1016/s0895-6111(96)00037-7: 0.20
+2024-11-19 09:26:17,897 - citation_tool - WARNING - PDF not available for DOI 10.1117/12.958183
+2024-11-19 09:26:17,943 - citation_tool - INFO - Similarity Score for DOI 10.1117/12.958183: 0.53
+2024-11-19 09:26:20,093 - citation_tool - WARNING - PDF not available for DOI 10.1017/cbo9780511760976.005
+2024-11-19 09:26:20,145 - citation_tool - INFO - Similarity Score for DOI 10.1017/cbo9780511760976.005: 0.31
+2024-11-19 09:26:22,811 - citation_tool - WARNING - PDF not available for DOI 10.1201/b18957-11
+2024-11-19 09:26:22,858 - citation_tool - INFO - Similarity Score for DOI 10.1201/b18957-11: 0.17
+2024-11-19 09:26:24,324 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-319-57027-3_2
+2024-11-19 09:26:24,370 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-319-57027-3_2: 0.17
+2024-11-19 09:26:25,200 - citation_tool - WARNING - PDF not available for DOI 10.1016/b978-012077790-7/50009-6
+2024-11-19 09:26:25,251 - citation_tool - INFO - Similarity Score for DOI 10.1016/b978-012077790-7/50009-6: 0.25
+2024-11-19 09:26:26,533 - citation_tool - WARNING - PDF not available for DOI 10.4103/ijri.ijri_39_20
+2024-11-19 09:26:26,571 - citation_tool - INFO - Similarity Score for DOI 10.4103/ijri.ijri_39_20: 0.15
+2024-11-19 09:26:29,238 - citation_tool - WARNING - PDF not available for DOI 10.1201/b19915-24
+2024-11-19 09:26:29,304 - citation_tool - INFO - Similarity Score for DOI 10.1201/b19915-24: 0.17
+2024-11-19 09:26:30,788 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-981-10-1613-4_3
+2024-11-19 09:26:30,853 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-981-10-1613-4_3: 0.34
+2024-11-19 09:26:31,435 - citation_tool - WARNING - PDF not available for DOI 10.1109/tmi.1982.4307580
+2024-11-19 09:26:31,500 - citation_tool - INFO - Similarity Score for DOI 10.1109/tmi.1982.4307580: 0.26
+2024-11-19 09:26:31,835 - citation_tool - WARNING - PDF not available for DOI 10.1002/9781119537397.ch1
+2024-11-19 09:26:31,900 - citation_tool - INFO - Similarity Score for DOI 10.1002/9781119537397.ch1: 0.41
+2024-11-19 09:26:33,681 - citation_tool - WARNING - PDF not available for DOI 10.1201/b18191-6
+2024-11-19 09:26:33,741 - citation_tool - INFO - Similarity Score for DOI 10.1201/b18191-6: 0.17
+2024-11-19 09:26:34,706 - citation_tool - WARNING - PDF not available for DOI 10.3329/bmrcb.v47i2.57767
+2024-11-19 09:26:34,771 - citation_tool - INFO - Similarity Score for DOI 10.3329/bmrcb.v47i2.57767: 0.25
+2024-11-19 09:26:35,006 - citation_tool - WARNING - PDF not available for DOI 10.4018/978-1-5225-0571-6.ch009
+2024-11-19 09:26:35,069 - citation_tool - INFO - Similarity Score for DOI 10.4018/978-1-5225-0571-6.ch009: 0.08
+2024-11-19 09:26:37,101 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-540-68879-2_5
+2024-11-19 09:26:37,163 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-540-68879-2_5: 0.20
+2024-11-19 09:26:39,439 - citation_tool - WARNING - PDF not available for DOI 10.1007/0-387-25444-7_1
+2024-11-19 09:26:39,502 - citation_tool - INFO - Similarity Score for DOI 10.1007/0-387-25444-7_1: 0.26
+2024-11-19 09:26:40,742 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-540-68879-2_20
+2024-11-19 09:26:40,804 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-540-68879-2_20: 0.32
+2024-11-19 09:26:41,154 - citation_tool - WARNING - PDF not available for DOI 10.1049/iet-tv.46.1124
+2024-11-19 09:26:41,217 - citation_tool - INFO - Similarity Score for DOI 10.1049/iet-tv.46.1124: 0.09
+2024-11-19 09:26:42,738 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-1-0716-1756-4_3
+2024-11-19 09:26:42,809 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-1-0716-1756-4_3: 0.36
+2024-11-19 09:26:44,896 - citation_tool - WARNING - PDF not available for DOI 10.1201/9781315155395-1
+2024-11-19 09:26:44,960 - citation_tool - INFO - Similarity Score for DOI 10.1201/9781315155395-1: 0.34
+2024-11-19 09:26:47,744 - citation_tool - WARNING - PDF not available for DOI 10.1201/9781420003864-32
+2024-11-19 09:26:47,808 - citation_tool - INFO - Similarity Score for DOI 10.1201/9781420003864-32: 0.24
+2024-11-19 09:26:48,261 - citation_tool - WARNING - PDF not available for DOI 10.4018/978-1-7998-5071-7.ch007
+2024-11-19 09:26:48,322 - citation_tool - INFO - Similarity Score for DOI 10.4018/978-1-7998-5071-7.ch007: 0.25
+2024-11-19 09:26:51,000 - citation_tool - WARNING - PDF not available for DOI 10.11648/j.ijmi.20210901.15
+2024-11-19 09:26:51,094 - citation_tool - INFO - Similarity Score for DOI 10.11648/j.ijmi.20210901.15: 0.34
+2024-11-19 09:26:52,948 - citation_tool - WARNING - PDF not available for DOI 10.1007/1-84628-146-6_15
+2024-11-19 09:26:53,013 - citation_tool - INFO - Similarity Score for DOI 10.1007/1-84628-146-6_15: 0.21
+2024-11-19 09:26:55,194 - citation_tool - WARNING - PDF not available for DOI 10.36647/tbeah/02.02.a004
+2024-11-19 09:26:55,235 - citation_tool - INFO - Similarity Score for DOI 10.36647/tbeah/02.02.a004: 0.31
+2024-11-19 09:26:57,242 - citation_tool - WARNING - PDF not available for DOI 10.5772/17873
+2024-11-19 09:26:57,287 - citation_tool - INFO - Similarity Score for DOI 10.5772/17873: 0.11
+2024-11-19 09:26:58,627 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-540-68879-2_21
+2024-11-19 09:26:58,670 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-540-68879-2_21: 0.28
+2024-11-19 09:27:00,368 - citation_tool - WARNING - PDF not available for DOI 10.2174/15734056091310281214
+2024-11-19 09:27:00,418 - citation_tool - INFO - Similarity Score for DOI 10.2174/15734056091310281214: 0.33
+2024-11-19 09:27:01,709 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-1-84882-710-3_2
+2024-11-19 09:27:01,751 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-1-84882-710-3_2: 0.31
+2024-11-19 09:27:05,945 - citation_tool - WARNING - PDF not available for DOI 10.1117/12.877839
+2024-11-19 09:27:05,997 - citation_tool - INFO - Similarity Score for DOI 10.1117/12.877839: 0.22
+2024-11-19 09:27:06,368 - citation_tool - ERROR - Error fetching PDF for DOI 10.1201/b18191-2: HTTPConnectionPool(host='www.crcnetbase.com', port=80): Max retries exceeded with url: /doi/10.1201/b18191-2 (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x00000263A12AF730>: Failed to resolve 'www.crcnetbase.com' ([Errno 11001] getaddrinfo failed)"))
+2024-11-19 09:27:06,416 - citation_tool - INFO - Similarity Score for DOI 10.1201/b18191-2: 0.17
+2024-11-19 09:27:06,835 - citation_tool - WARNING - PDF not available for DOI 10.1002/9780471743989.vse9967
+2024-11-19 09:27:06,878 - citation_tool - INFO - Similarity Score for DOI 10.1002/9780471743989.vse9967: 0.36
+2024-11-19 09:27:07,920 - citation_tool - WARNING - PDF not available for DOI 10.1016/j.jmir.2023.06.139
+2024-11-19 09:27:07,965 - citation_tool - INFO - Similarity Score for DOI 10.1016/j.jmir.2023.06.139: 0.10
+2024-11-19 09:27:09,000 - citation_tool - WARNING - PDF not available for DOI 10.1016/j.jmir.2024.101667
+2024-11-19 09:27:09,056 - citation_tool - INFO - Similarity Score for DOI 10.1016/j.jmir.2024.101667: 0.27
+2024-11-19 09:27:10,597 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-319-47999-6_35-2
+2024-11-19 09:27:10,642 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-319-47999-6_35-2: 0.23
+2024-11-19 09:27:12,456 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-642-13271-1_35
+2024-11-19 09:27:12,503 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-642-13271-1_35: 0.23
+2024-11-19 09:27:14,006 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-540-68879-2_36
+2024-11-19 09:27:14,046 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-540-68879-2_36: 0.22
+2024-11-19 09:27:15,201 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-319-93785-4_35
+2024-11-19 09:27:15,243 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-319-93785-4_35: 0.23
+2024-11-19 09:27:16,991 - citation_tool - WARNING - PDF not available for DOI 10.2147/rmi.s39098
+2024-11-19 09:27:17,037 - citation_tool - INFO - Similarity Score for DOI 10.2147/rmi.s39098: 0.13
+2024-11-19 09:27:20,307 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-540-68879-2_17
+2024-11-19 09:27:20,375 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-540-68879-2_17: 0.24
+2024-11-19 09:27:21,892 - citation_tool - WARNING - PDF not available for DOI 10.1007/978-3-540-68879-2_37
+2024-11-19 09:27:21,957 - citation_tool - INFO - Similarity Score for DOI 10.1007/978-3-540-68879-2_37: 0.28
+2024-11-19 09:28:10,587 - citation_tool - INFO - TeX file selected: C:/Users/cgatt/OneDrive/Desktop/Reference Tooling/Latex Files/demo.tex
+2024-11-19 09:28:11,975 - citation_tool - INFO - BibTeX file selected: C:/Users/cgatt/OneDrive/Desktop/Reference Tooling/Latex Files/demo.bib
+2024-11-19 09:28:12,850 - citation_tool - INFO - Starting document processing...
+2024-11-19 09:28:12,850 - citation_tool - INFO - Started processing in a new thread.
+2024-11-19 09:28:12,850 - citation_tool - INFO - Parsing TeX document: C:/Users/cgatt/OneDrive/Desktop/Reference Tooling/Latex Files/demo.tex
+2024-11-19 09:28:12,851 - citation_tool - INFO - Extracted citations: set()
+2024-11-19 09:28:12,851 - citation_tool - INFO - Parsing BibTeX file: C:/Users/cgatt/OneDrive/Desktop/Reference Tooling/Latex Files/demo.bib
+2024-11-19 09:28:33,722 - citation_tool - ERROR - CrossRef API request failed: HTTPSConnectionPool(host='api.crossref.org', port=443): Read timed out. (read timeout=10)
+2024-11-19 09:28:50,106 - citation_tool - ERROR - CrossRef API request failed: HTTPSConnectionPool(host='api.crossref.org', port=443): Read timed out. (read timeout=10)

@@ -1,12 +1,9 @@
-from ctypes import util
-from tkinter import filedialog, messagebox, scrolledtext
-from fastapi import logger
+from tkinter import filedialog, messagebox, scrolledtext, Label, StringVar
 import spacy
 import yake
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer, util
 from transformers import pipeline
 import requests
-import aiohttp
 import bibtexparser
 import re
 import subprocess
@@ -19,20 +16,10 @@ import os
 from typing import Dict, List, Optional
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('citation_tool.log'),
-        logging.StreamHandler()
-    ]
-)
-
-# Create logger instance
 logger = logging.getLogger('citation_tool')
 logger.setLevel(logging.INFO)
 
-# Ensure the logger has handlers
+# Check if handlers are already added to avoid duplication
 if not logger.handlers:
     # File handler
     fh = logging.FileHandler('citation_tool.log')
@@ -69,8 +56,10 @@ class CitationAssistant:
             windowsSize=1
         )
 
+        self.similarity_score_var = StringVar()
         self._setup_gui()
         self._setup_processing()
+        self._ensure_pdfs_directory()
 
     def _setup_gui(self):
         # Create main frames
@@ -80,7 +69,7 @@ class CitationAssistant:
         self.right_frame = ctk.CTkFrame(self.window, width=580, height=780)
         self.right_frame.grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
 
-        # File selection
+        # File selection buttons
         self.tex_button = ctk.CTkButton(
             self.left_frame, 
             text="Select TeX File",
@@ -99,16 +88,22 @@ class CitationAssistant:
         self.tex_display = scrolledtext.ScrolledText(
             self.left_frame,
             width=70,
-            height=30
+            height=30,
+            wrap=tk.WORD
         )
         self.tex_display.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
 
         self.results_display = scrolledtext.ScrolledText(
             self.right_frame,
             width=70,
-            height=30
+            height=30,
+            wrap=tk.WORD
         )
         self.results_display.grid(row=1, column=0, columnspan=2, padx=10, pady=10)
+
+        # Similarity score label
+        self.similarity_label = Label(self.right_frame, textvariable=self.similarity_score_var, font=("Arial", 12))
+        self.similarity_label.grid(row=3, column=0, columnspan=2, padx=10, pady=10)
 
         # Process button
         self.process_button = ctk.CTkButton(
@@ -127,43 +122,58 @@ class CitationAssistant:
         self.tex_file = None
         self.bib_file = None
         self.processing = False
-        
+
+    def _ensure_pdfs_directory(self):
+        if not os.path.exists('pdfs'):
+            os.makedirs('pdfs')
+            logger.info("Created 'pdfs' directory.")
+
     @sleep_and_retry
     @limits(calls=10, period=1)  # Rate limit CrossRef API calls
     def _query_crossref(self, query):
         url = "https://api.crossref.org/works"
         headers = {
-            'User-Agent': 'CitationAssistant/1.0 (mailto:your@email.com)'
+            'User-Agent': 'CitationAssistant/1.0 (cgatting@gmail.com)'
         }
         params = {
             'query': query,
-            'rows': 100,
+            'rows': 3,
             'select': 'DOI,title,author,published-print,container-title'
         }
-        response = requests.get(url, headers=headers, params=params)
-        return response.json()['message']['items']
+        try:
+            response = requests.get(url, headers=headers, params=params, timeout=10)
+            response.raise_for_status()
+            return response.json().get('message', {}).get('items', [])
+        except requests.RequestException as e:
+            logger.error(f"CrossRef API request failed: {e}")
+            return []
 
-    async def _fetch_pdf(self, doi):
-        async with aiohttp.ClientSession() as session:
-            try:
-                url = f"https://doi.org/{doi}"
-                async with session.get(url) as response:
-                    if response.status == 200:
-                        return await response.read()
-                    return None
-            except Exception as e:
-                logger.error(f"Error fetching PDF for DOI {doi}: {str(e)}")
+    def _fetch_pdf(self, doi):
+        try:
+            url = f"https://doi.org/{doi}"
+            response = requests.get(url, timeout=10)
+            if response.status_code == 200 and 'application/pdf' in response.headers.get('Content-Type', ''):
+                pdf_path = os.path.join('pdfs', f"{doi.split('/')[-1]}.pdf")
+                with open(pdf_path, 'wb') as pdf_file:
+                    pdf_file.write(response.content)
+                logger.info(f"Downloaded PDF for DOI {doi} to {pdf_path}")
+                return pdf_path
+            else:
+                logger.warning(f"PDF not available for DOI {doi}")
                 return None
+        except requests.RequestException as e:
+            logger.error(f"Error fetching PDF for DOI {doi}: {e}")
+            return None
 
     def _analyze_text_similarity(self, text1, text2):
         # Create embeddings
-        embedding1 = self.sentence_model.encode(text1)
-        embedding2 = self.sentence_model.encode(text2)
+        embedding1 = self.sentence_model.encode(text1, convert_to_tensor=True)
+        embedding2 = self.sentence_model.encode(text2, convert_to_tensor=True)
         
         # Calculate cosine similarity
         similarity = util.pytorch_cos_sim(embedding1, embedding2)
         
-        return float(similarity[0][0])
+        return float(similarity.item())
 
     def _extract_key_concepts(self, text):
         doc = self.nlp(text)
@@ -175,7 +185,8 @@ class CitationAssistant:
         keywords = self.kw_extractor.extract_keywords(text)
         
         # Get summary using BART
-        summary = self.summarizer(text, max_length=130, min_length=30)[0]['summary_text']
+        summary_result = self.summarizer(text, max_length=130, min_length=30, truncation=True)
+        summary = summary_result[0]['summary_text'] if summary_result else ""
         
         return {
             'entities': entities,
@@ -187,9 +198,14 @@ class CitationAssistant:
         self.tex_file = filedialog.askopenfilename(filetypes=[("TeX files", "*.tex")])
         if self.tex_file:
             logger.info(f"TeX file selected: {self.tex_file}")
-            with open(self.tex_file, 'r', encoding='utf-8') as f:
+            try:
+                with open(self.tex_file, 'r', encoding='utf-8') as f:
+                    content = f.read()
                 self.tex_display.delete(1.0, tk.END)
-                self.tex_display.insert(tk.END, f.read())
+                self.tex_display.insert(tk.END, content)
+            except Exception as e:
+                logger.error(f"Failed to read TeX file: {e}")
+                messagebox.showerror("Error", f"Failed to read TeX file: {e}")
 
     def _select_bib_file(self):
         self.bib_file = filedialog.askopenfilename(filetypes=[("BibTeX files", "*.bib")])
@@ -202,12 +218,19 @@ class CitationAssistant:
             logger.error("Processing failed: Both .tex and .bib files must be selected.")
             return
 
+        if self.processing:
+            messagebox.showwarning("Processing", "Processing is already in progress.")
+            return
+
         self.processing = True
         self.process_button.configure(state="disabled")
+        self.progress.set(0)
+        self.results_display.delete(1.0, tk.END)
+        self.similarity_score_var.set("")  # Clear previous similarity score
         
         # Start processing in a new thread to prevent GUI freezing
         threading.Thread(target=self._process_document, daemon=True).start()
-        logger.info("Starting processing in a new thread...")
+        logger.info("Started processing in a new thread.")
 
     def _process_document(self):
         try:
@@ -219,7 +242,7 @@ class CitationAssistant:
                 tex_content = f.read()
             
             # Extract existing citations
-            citations = set(re.findall(r'\\cite{([^}]*)}', tex_content))
+            citations = set(re.findall(r'\\cite[t|p]?{([^}]+)}', tex_content))
             logger.info(f"Extracted citations: {citations}")
             
             # Parse BibTeX file
@@ -229,39 +252,72 @@ class CitationAssistant:
             
             # Process document sections and find missing citations
             sections = re.split(r'\\section{[^}]*}', tex_content)
-            for i, section in enumerate(sections):
+            total_sections = len(sections)
+            for idx, section in enumerate(sections, start=1):
+                if not section.strip():
+                    continue
+                self._update_progress((idx / total_sections) * 100)
                 concepts = self._extract_key_concepts(section)
-                relevant_papers = self._query_crossref(" ".join(concepts['keywords']))
+                query = " ".join(concepts['keywords'])
+                if not query:
+                    continue
+                relevant_papers = self._query_crossref(query)
                 
                 # Add new citations and references
-                if relevant_papers:
-                    self._update_files(relevant_papers[0], citations, bib_database)
+                for paper in relevant_papers:
+                    doi = paper.get('DOI', '')
+                    if not doi or doi in citations:
+                        continue
+                    pdf_path = self._fetch_pdf(doi)
+                    title = paper.get('title', [''])[0]
+                    similarity_score = self._analyze_text_similarity(section, title)
+                    logger.info(f"Similarity Score for DOI {doi}: {similarity_score:.2f}")
+                    
+                    # Update results display in the main thread
+                    self.window.after(0, lambda score=similarity_score: self._update_similarity_display(score))
+                    
+                    if similarity_score > 0.7:  # Threshold can be adjusted
+                        self._update_files(paper, citations, bib_database)
             
+            # Write updated BibTeX file
             logger.info("Writing updated BibTeX file...")
             with open(self.bib_file, 'w', encoding='utf-8') as f:
                 bibtexparser.dump(bib_database, f)
             
+            # Validate document
             logger.info("Validating final document...")
             self._validate_document()
             
             logger.info("Document processing completed successfully.")
-            messagebox.showinfo("Success", "Document processing completed!")
-            
+            self.window.after(0, lambda: messagebox.showinfo("Success", "Document processing completed!"))
+        
         except Exception as e:
-            logger.error(f"Processing failed: {str(e)}")
-            messagebox.showerror("Error", f"Processing failed: {str(e)}")
+            logger.error(f"Processing failed: {e}")
+            self.window.after(0, lambda: messagebox.showerror("Error", f"Processing failed: {e}"))
         
         finally:
             self.processing = False
-            self.process_button.configure(state="normal")
+            self.window.after(0, lambda: self.process_button.configure(state="normal"))
+            self._update_progress(100)
+
+    def _update_similarity_display(self, score):
+        self.similarity_score_var.set(f"Similarity Score: {score:.2f}")
 
     def _update_files(self, paper, citations, bib_database):
         # Generate citation key
-        if 'author' in paper:
-            author = paper['author'][0]['family'].lower()
-            citation_key = f"{author}{paper.get('published-print', {}).get('date-parts', [[2024]])[0][0]}"
+        if 'author' in paper and paper['author']:
+            author = paper['author'][0].get('family', 'unknown').lower()
+            year = paper.get('published-print', {}).get('date-parts', [[2024]])[0][0]
+            citation_key = f"{author}{year}"
         else:
             citation_key = f"ref{len(citations) + 1}"
+        
+        # Ensure unique citation key
+        original_key = citation_key
+        counter = 1
+        while any(entry['ID'] == citation_key for entry in bib_database.entries):
+            citation_key = f"{original_key}{counter}"
+            counter += 1
         
         # Create BibTeX entry
         entry = {
@@ -275,17 +331,35 @@ class CitationAssistant:
         }
         
         bib_database.entries.append(entry)
+        citations.add(citation_key)
+
+        # Add citation to TeX file in the appropriate location
+        try:
+            with open(self.tex_file, 'a', encoding='utf-8') as f:
+                f.write(f"\\citep{{{citation_key}}}\n")
+            logger.info(f"Added citation {citation_key} to TeX file.")
+        except Exception as e:
+            logger.error(f"Failed to add citation to TeX file: {e}")
 
     def _validate_document(self):
-        # Run LaTeX compilation to verify citations
-        result = subprocess.run(
-            ['pdflatex', self.tex_file],
-            capture_output=True,
-            text=True
-        )
-        if result.returncode != 0:
-            logger.error(f"LaTeX compilation failed: {result.stderr}")
-            raise Exception("LaTeX compilation failed")
+        try:
+            result = subprocess.run(
+                ['pdflatex', self.tex_file],
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+            if result.returncode != 0:
+                logger.error(f"LaTeX compilation failed: {result.stderr}")
+                raise Exception("LaTeX compilation failed. Check the log for details.")
+            else:
+                logger.info("LaTeX compilation succeeded.")
+        except subprocess.TimeoutExpired:
+            logger.error("LaTeX compilation timed out.")
+            raise Exception("LaTeX compilation timed out.")
+
+    def _update_progress(self, value):
+        self.window.after(0, lambda: self.progress.set(min(value / 100, 1.0)))
 
     def run(self):
         self.window.mainloop()
