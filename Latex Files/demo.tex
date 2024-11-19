@@ -12,8 +12,11 @@
 \usepackage{hhline}
 \usepackage{setspace}
 \usepackage{fancyhdr}
-\usepackage[backend=biber]{biblatex}
+\usepackage[numbers,sort&compress]{natbib}
 \usepackage{abstract}
+
+\bibliographystyle{unsrtnat}
+\bibliography{demo}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -39,7 +42,7 @@ University Name\\[1cm]
 \end{titlepage}
 
 \begin{abstract}
-This comprehensive review explores the fundamental principles and clinical applications of modern medical imaging technologies. The article examines the physical foundations of various imaging modalities, including X-ray computed tomography (CT), magnetic resonance imaging (MRI), ultrasound, and nuclear medicine techniques. We discuss how these technologies leverage different forms of energy-matter interactions to visualize internal body structures and physiological processes. The review also analyzes the specific clinical applications of each modality across various medical specialties, highlighting their roles in diagnosis, treatment planning, and disease monitoring. This work provides healthcare professionals and researchers with a thorough understanding of current medical imaging capabilities and their impact on patient care.
+This comprehensive review explores the fundamental principles and clinical applications of modern medical imaging technologies \citep{mehndiratta2014,kanabolo2019}. The article examines the physical foundations of various imaging modalities, including X-ray computed tomography (CT), magnetic resonance imaging (MRI), ultrasound, and nuclear medicine techniques. We discuss how these technologies leverage different forms of energy-matter interactions to visualize internal body structures and physiological processes. The review also analyzes the specific clinical applications of each modality across various medical specialties, highlighting their roles in diagnosis, treatment planning, and disease monitoring \citep{goh2024}. This work provides healthcare professionals and researchers with a thorough understanding of current medical imaging capabilities and their impact on patient care.
 \end{abstract}
 
 \newpage
@@ -47,7 +50,7 @@ This comprehensive review explores the fundamental principles and clinical appli
 \newpage
 
 \section{Introduction}
-Medical imaging represents one of the most significant technological advances in modern medicine, fundamentally transforming how healthcare professionals diagnose, treat, and monitor diseases. The field has evolved from simple X-ray imaging to sophisticated three-dimensional and real-time imaging technologies that provide unprecedented insights into human anatomy and physiology. This evolution has enabled non-invasive visualization of internal structures and physiological processes, revolutionizing medical practice across all specialties.
+Medical imaging represents one of the most significant technological advances in modern medicine, fundamentally transforming how healthcare professionals diagnose, treat, and monitor diseases \citep{kaur2024}. The field has evolved from simple X-ray imaging to sophisticated three-dimensional and real-time imaging technologies that provide unprecedented insights into human anatomy and physiology. This evolution has enabled non-invasive visualization of internal structures and physiological processes, revolutionizing medical practice across all specialties.
 
 The impact of medical imaging extends beyond basic diagnostic capabilities. Modern imaging technologies facilitate precise surgical planning, enable minimally invasive procedures, and allow for accurate monitoring of treatment responses. These advances have significantly improved patient outcomes while reducing the need for exploratory surgeries and other invasive diagnostic procedures.
 
@@ -91,4 +94,5 @@ The field of medical imaging continues to evolve with technological advances in 
 \section{Conclusion}
 Medical imaging has evolved from a simple diagnostic tool to an essential component of modern healthcare. The integration of advanced imaging technologies with precision medicine approaches is enabling more personalized and effective treatment strategies. As technology continues to advance, we can anticipate further improvements in imaging capabilities, leading to earlier disease detection and more effective treatments.
 
+\bibliography{demo}
 \end{document}
