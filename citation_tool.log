@@ -391,3 +391,16 @@ ng in a new thread...
 2024-11-19 10:53:18,653 - citation_tool - INFO - Similarity Score for DOI 10.1007/0-387-25444-7_1: 0.70
 2024-11-19 10:53:22,256 - citation_tool - INFO - Similarity Score for DOI 10.14738/bjhmr.111.16585: 0.84
 2024-11-19 10:53:22,666 - citation_tool - ERROR - Processing failed: HTTPConnectionPool(host='www.crcnetbase.com', port=80): Max retries exceeded with url: /doi/10.1201/b19063-7 (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x00000280C5A630A0>: Failed to resolve 'www.crcnetbase.com' ([Errno 11001] getaddrinfo failed)"))
+2024-11-19 11:27:04,795 - citation_tool - ERROR - Processing failed: [E050] Can't find model 'en_core_web_md'. It doesn't seem to be a Python package or a valid path to a data directory.
+2024-11-19 11:58:11,999 - citation_tool - ERROR - Downloading spacy model...
+2024-11-19 11:59:18,897 - citation_tool - ERROR - Processing failed: argument of type '_CountingAttr' is not iterable
+2024-11-19 20:49:13,590 - citation_tool - ERROR - Processing failed: Cannot connect to host www.springerlink.com:80 ssl:default [getaddrinfo failed]
+2024-11-19 20:58:36,045 - citation_tool - ERROR - Processing failed: Cannot connect to host www.crcnetbase.com:80 ssl:default [getaddrinfo failed]
+2024-11-19 23:17:26,061 - citation_tool - ERROR - Processing failed: Cannot connect to host www.springerlink.com:80 ssl:default [getaddrinfo failed]
+2024-11-20 21:38:00,124 - citation_tool - WARNING - Failed to fetch DOI 10.2174/157340560903131120162258: 403
+2024-11-20 21:38:30,016 - citation_tool - WARNING - Failed to fetch DOI 10.5580/1294: 404
+2024-11-20 21:38:46,430 - citation_tool - WARNING - Failed to fetch DOI 10.1002/9781118371558.fmatter: 403
+2024-11-20 21:38:46,826 - citation_tool - WARNING - Failed to fetch DOI 10.1002/9781119180012.fmatter: 403
+2024-11-20 21:46:49,219 - citation_tool - WARNING - Failed to fetch DOI 10.1002/9781119847212.ch3: 403
+2024-11-20 21:47:19,692 - citation_tool - WARNING - Connection error for DOI 10.5353/th_b5805164: 
+2024-11-20 21:47:30,889 - citation_tool - WARNING - Failed to fetch DOI 10.2174/1573405615666190408115158: 403
